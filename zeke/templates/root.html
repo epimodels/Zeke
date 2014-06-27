@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+
+    <title>Zeke: The Zombie Epidemic Modeling Platform</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/starter-template.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    {% block head %}
+    {% endblock %}
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Zeke</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            {% block nav %}
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            {% endblock %}
+          </ul>
+          <form class="navbar-right">
+            {% if user.is_active %}
+            <ul class="list-unstyled">
+                <li class="dropdown">
+                    <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" style="color: white" href="#">{{ user }}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/logout">Sign out</a></li>
+                    </ul>
+                </li>
+            </ul>
+            {% else %}
+            <a class="btn btn-success" style="color: white" href="/login">Sign in</a>
+            {% endif %}
+          </form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container" style="margin-bottom: 4em">
+      {% block content %}
+      <div class="row">
+        <div class="col-lg-7">
+            <h2>Select a model</h2>
+        </div>
+        <div class="col-lg-3">
+            <h2>Controls</h2>
+        </div>
+        <div class="col-lg-7">
+            <form action="/">
+                <select class="form-control" name="model" onchange="this.form.submit()">
+                    {{ options|safe }}
+                </select> 
+            </form>
+            <br />
+            {% if model != 'haven' or model == 'haven' and user.is_active %}
+                <div id="plot" class="col-lg-13 img-thumbnail img-rounded" style="height: 490px; text-align: center">
+                    <div id="spinner" style="width: 655px"><br /><img src="/static/spinner.gif" style="padding-top: 220px"></div>
+                </div>
+            {% else %}
+                <div class="col-lg-12" style="text-align: center">
+                    <div style="font-size: 200%; margin-top: 150px">Please <a href="/login">sign in</a></span>
+                </div>
+            {% endif %}
+        </div>
+        {% if model == 'sir' %}
+        <div class="col-lg-3">
+            <hr />
+            <p>
+                Susceptible-Zombie-Dead mathematical model. Takes two arguments:
+            </p>
+            <ul>
+                <li>Beta: Contact rate</li>
+                <li>Gamma: Infection duration in days</li>
+            </ul>
+            <hr />
+            <div class="container" style="width: 267px">
+                <form action="/">
+                    <input type="hidden" name="model" value="sir">
+                    <div class="row">
+                        <span class="col-lg-3">Beta</span><span class="col-lg-1"><input id="beta" name="beta" value="{{beta}}"></span>
+                    </div>
+
+                    <div class="row">
+                        <span class="col-lg-3">Gamma</span><span class="col-lg-1"><input id="gamma" name="gamma" value="{{gamma}}"></span>
+                    </div>
+
+                    <div class="row">
+                        <span class="col-lg-12" style="text-align: center; margin-top: 1em">
+                            <input name="set"   class="btn btn-primary" type="submit" value="Set values">
+                        </span>
+                        <span class="col-lg-12" style="text-align: center; margin-top: 1em">
+                            <input name="reset" class="btn" type="submit" value="Reset">
+                        </span>
+                    </div>
+
+                    <br />
+                </form>
+                
+            </div>
+
+            <hr />
+
+        </div>
+        {% endif %}
+        {% if model == 'slowsir' %}
+        <div class="col-lg-3">
+            <hr />
+            <p>
+                Slow Susceptible-Zombie-Dead mathematical model. Takes two arguments:
+            </p>
+            <ul>
+                <li>Beta: Contact rate</li>
+                <li>Gamma: Infection duration in days</li>
+            </ul>
+            <hr />
+            <div class="container" style="width: 267px">
+                <form action="/">
+                    <input type="hidden" name="model" value="slowsir">
+                    <div class="row">
+                        <span class="col-lg-3">Beta</span><span class="col-lg-1"><input id="beta" name="beta" value="{{beta}}"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-3">Gamma</span><span class="col-lg-1"><input id="gamma" name="gamma" value="{{gamma}}"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-12" style="text-align: center; margin-top: 1em">
+                            <input name="set"   class="btn btn-primary" type="submit" value="Set values">
+                        </span>
+                        <span class="col-lg-12" style="text-align: center; margin-top: 1em">
+                            <input name="reset" class="btn" type="submit" value="Reset">
+                        </span>
+                    </div>
+                    <br />
+                </form>
+                
+            </div>
+
+            <hr />
+        </div>
+        {% endif %}
+        {% if model == 'seir' %}
+        <div class="col-lg-3" >
+            <hr />
+            <p>
+                Zombie epidemic model with latent infection period. Takes three arguments:
+            </p>
+            <ul>
+                <li>Beta: Contact rate</li>
+                <li>Gamma: Infection duration in days</li>
+                <li>Alpha: A latent (non-zombie infected) period in days</li>
+            </ul>
+            <hr />
+            <div class="container" style="width: 267px">
+                <form action="/">
+                    <input type="hidden" name="model" value="seir">
+                    <div class="row">
+                        <span class="col-lg-3">Beta</span><span class="col-lg-1"><input id="beta" name="beta" value="{{beta}}"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-3">Gamma</span><span class="col-lg-1"><input id="gamma" name="gamma" value="{{gamma}}"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-3">Alpha</span><span class="col-lg-1"><input id="alpha" name="alpha" value="{{alpha}}"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-12" style="text-align: center; margin-top: 1em">
+                            <input name="set"   class="btn btn-primary" type="submit" value="Set values">
+                        </span>
+                        <span class="col-lg-12" style="text-align: center; margin-top: 1em">
+                            <input name="reset" class="btn" type="submit" value="Reset">
+                        </span>
+                    </div>
+                    <br />
+                </form>
+                
+            </div>
+
+            <hr />
+        </div>
+        {% endif %}
+        {% if model == 'haven' and user.is_active %}
+        <div class="col-lg-3" >
+            <hr />
+            <p>
+                "Safe Haven" Model - Survivors make for shelter, can fight back. Takes six arguments:
+            </p>
+            <ul>
+               <li> Psi: Rate at which survivors find shelter </li>
+               <li> Beta_F: Contact rate for unsheltered survivors </li>
+               <li> Beta_H: Contact rate for sheltered survivors </li>
+               <li> Gamma: Infection duration in days </li>
+               <li> Alpha: A latent (non-zombie infected) period in days </li>
+               <li> Kappa: Probability a sheltered survivor x zombie encounter ends with a dead zombie </li>
+            </ul>
+            <hr />
+            <div class="container" style="width: 267px">
+                <form action="/">
+                    <input type="hidden" name="model" value="haven">
+                    <div class="row">
+                        <span class="col-lg-3">Psi</span><span class="col-lg-1"> <input id="psi" name="psi" value="{{psi}}"> </span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-3">Beta_F </span><span class="col-lg-1"><input id="beta_f" name="beta_f" value="{{beta_f}}"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-3">Beta_H </span><span class="col-lg-1"><input id="beta_h" name="beta_h" value="{{beta_h}}"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-3">Gamma </span><span class="col-lg-1"><input id="gamma" name="gamma" value="{{gamma}}"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-3">Alpha </span><span class="col-lg-1"><input id="alpha" name="alpha" value="{{alpha}}"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-3">Kappa </span><span class="col-lg-1"><input id="kappa" name="kappa" value="{{kappa}}"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-12" style="text-align: center; margin-top: 1em">
+                            <input name="set"   class="btn btn-primary" type="submit" value="Set values">
+                        </span>
+                        <span class="col-lg-12" style="text-align: center; margin-top: 1em">
+                            <input name="reset" class="btn" type="submit" value="Reset">
+                        </span>
+                    </div>
+                    <br />
+
+                </form>
+                
+            </div>
+
+            <hr />
+<br />
+        </div>
+        {% endif %}
+      </div>
+    {% endblock %}
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <!-- Based on http://www.html5rocks.com/en/tutorials/file/xhr2/ -->
+    <script>
+        window.URL = window.URL || window.webkitURL;  // Take care of vendor prefixes.
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'plot?{{query_string}}', true);
+        xhr.responseType = 'blob';
+        xhr.onload = function(e) {
+          if (this.status == 200) {
+            var blob = this.response;
+            var img = document.createElement('img');
+            //img.setAttribute("class", "img-thumbnail img-rounded"); // http://stackoverflow.com/a/9423014/185820
+            img.onload = function(e) {
+              window.URL.revokeObjectURL(img.src); // Clean up after yourself.
+            };
+            img.src = window.URL.createObjectURL(blob);
+            document.getElementById("spinner").remove();
+            document.getElementById("plot").appendChild(img);
+          }
+        };
+        xhr.send();
+    </script>
+    <script src="/static/buttons.js"></script>
+  </body>
+</html>
