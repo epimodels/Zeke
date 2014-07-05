@@ -86,7 +86,7 @@
                 </select> 
             </form>
             <br />
-            {% if model != 'haven' or model == 'haven' and user.is_active %}
+            {% if model != 'haven' or model == 'haven' %} 
                 <div id="plot" class="col-lg-13 img-thumbnail img-rounded" style="height: 490px; text-align: center">
                     <div id="spinner" style="width: 655px"><br /><img src="/static/spinner.gif" style="padding-top: 220px"></div>
                 </div>
