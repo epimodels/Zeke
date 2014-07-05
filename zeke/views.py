@@ -241,7 +241,7 @@ def plot_sir(infect_prob, infect_duration):
         axes.plot(sir[0], sir[3], '-.b', linewidth=3)
         axes.set_xlabel("Time (days)")
         axes.set_ylabel("Percent of Population")
-        axes.set_title("Zombie SIR Epidemic\n(R_0: %s)" % sir[4])
+        axes.set_title("Zombie SIR Epidemic")
         axes.grid(True)
         axes.legend(("Survivors", "Zombies", "Dead"),
                     shadow=True, fancybox=True)
@@ -300,7 +300,7 @@ def plot_haven(infect_prob_free, infect_prob_safe, infect_duration,
         axes.plot(haven[0], haven[4], 'r-', linewidth=3)
         axes.set_xlabel("Time (days)")
         axes.set_ylabel("Percent of Population")
-        axes.set_title("Safe Haven Results - Low Kappa")
+        axes.set_title("Zombie Epidemic with Safe Haven")
         axes.grid(True)
         axes.legend(
             ("Wandering", "Safe Survivors", "Latent", "Infected"), shadow=True,
