@@ -136,42 +136,6 @@
 
         </div>
         {% endif %}
-        {% if model == 'slowsir' %}
-        <div class="col-lg-3">
-            <hr />
-            <p>
-                Slow Susceptible-Zombie-Dead mathematical model. Takes two arguments:
-            </p>
-            <ul>
-                <li>Beta: Contact rate</li>
-                <li>Gamma: Infection duration in days</li>
-            </ul>
-            <hr />
-            <div class="container" style="width: 267px">
-                <form action="/">
-                    <input type="hidden" name="model" value="slowsir">
-                    <div class="row">
-                        <span class="col-lg-3">Beta</span><span class="col-lg-1"><input id="beta" name="beta" value="{{beta}}"></span>
-                    </div>
-                    <div class="row">
-                        <span class="col-lg-3">Gamma</span><span class="col-lg-1"><input id="gamma" name="gamma" value="{{gamma}}"></span>
-                    </div>
-                    <div class="row">
-                        <span class="col-lg-12" style="text-align: center; margin-top: 1em">
-                            <input name="set"   class="btn btn-primary" type="submit" value="Set values">
-                        </span>
-                        <span class="col-lg-12" style="text-align: center; margin-top: 1em">
-                            <input name="reset" class="btn" type="submit" value="Reset">
-                        </span>
-                    </div>
-                    <br />
-                </form>
-                
-            </div>
-
-            <hr />
-        </div>
-        {% endif %}
         {% if model == 'seir' %}
         <div class="col-lg-3" >
             <hr />

@@ -9,7 +9,6 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 from .models import ZombieSIR
 from .models import ZombieSEIR
 from .models import Haven
-from .models import SlowSIR
 import cStringIO
 
 
@@ -26,7 +25,6 @@ OPTIONS = """
                 <option value="sir"%s>SIR</option>
                 <option value="seir"%s>SEIR</option>
                 <option value="haven"%s>Haven</option>
-                <option value="slowsir"%s>SlowSIR</option>
 """
 
 
@@ -99,7 +97,7 @@ def root(request):
     qs = parse_qs(query_string)
 
     # XXX Quick and dirty options selector
-    options = (' selected', '', '', '')
+    options = (' selected', '', '')
     model = 'sir'
 
     psi, beta, beta_f, beta_h, gamma, alpha, kappa = (
@@ -115,20 +113,17 @@ def root(request):
 
         # XXX Quick and dirty options selector
         if 'sir' in selected:
-            options = (' selected', '', '', '')
+            options = (' selected', '', '')
             model = 'sir'
         if 'seir' in selected:
-            options = ('', ' selected', '', '')
+            options = ('', ' selected', '')
             model = 'seir'
         if 'haven' in selected:
             # Fix defaults
             gamma = 0.10
             alpha = 0.50
-            options = ('', '', ' selected', '')
+            options = ('', '', ' selected')
             model = 'haven'
-        if 'slowsir' in selected:
-            options = ('', '', '', ' selected')
-            model = 'slowsir'
 
     # Persist qs values across page loads
     if 'psi' in qs:
@@ -208,12 +203,6 @@ def plot(request):
                 kappa = float(qs['kappa'][0])
             canvas = plot_haven(beta_f, beta_h, gamma, alpha, kappa, psi)
 
-        if 'slowsir' in qs['model']:
-            if 'beta' in qs:
-                beta = float(qs['beta'][0])
-            if 'gamma' in qs:
-                gamma = float(qs['gamma'][0])
-            canvas = plot_slowsir(beta, gamma)
     else:
         canvas = plot_sir(beta, gamma)
 
@@ -312,33 +301,6 @@ def plot_haven(infect_prob_free, infect_prob_safe, infect_duration,
         axes.set_ylabel("Percent of Population")
         axes.grid(True)
         axes.legend(("Culled", "Dead"), shadow=True, fancybox=True)
-    else:
-        ab = error()
-        axes.set_title("Sorry, there has been an error.")
-        axes.add_artist(ab)
-    return canvas
-
-
-def plot_slowsir(infect_prob, infect_duration):
-
-    """
-    Plot SIR slowly, return canvas
-    """
-    slowsir = SlowSIR(infect_prob, infect_duration)
-    figure = Figure()
-    canvas = FigureCanvasAgg(figure)
-    axes = figure.add_subplot(1, 1, 1)
-
-    if slowsir is not False:
-        axes.plot(slowsir[0], slowsir[1], 'g--', linewidth=3)
-        axes.plot(slowsir[0], slowsir[2], 'r-', linewidth=3)
-        axes.plot(slowsir[0], slowsir[3], '-.b', linewidth=3)
-        axes.set_xlabel("Time (days)")
-        axes.set_ylabel("Percent of Population")
-        axes.set_title("Zombie SIR Epidemic")
-        axes.grid(True)
-        axes.legend(("Survivors", "Zombies", "Dead"),
-                    shadow=True, fancybox=True)
     else:
         ab = error()
         axes.set_title("Sorry, there has been an error.")
