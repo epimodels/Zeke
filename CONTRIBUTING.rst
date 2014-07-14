@@ -15,7 +15,7 @@ Pull requests are reviewed as soon as possible. In order to speed this process a
 
 * Single-feature branches: Keep branches clearly defined to one feature, which will make reviewing what changes were made, their effects, etc. easier. 
 * Note in the commit message whether the pull request is a model, UI, or backend change, or all of the above.
-* When at all possible, *Zeke* strives to use standard, well-supported tools that are part of the Python scientific computing ecosystem. The standard libraries we use are NumPy, SciPy, and Matplotlib, as well as Django for front-end work. If a new model, back end feature etc. requires the use of another library, please make a note of this in the pull request, as well as a rational for why the use of this library is necessary.
+* When at all possible, *Zeke* strives to use standard, well-supported tools that are part of the Python scientific computing ecosystem. The standard libraries we use are NumPy, SciPy, NetworkX and Matplotlib, as well as Django for front-end work. If a new model, back end feature etc. requires the use of another library, please make a note of this in the pull request, as well as a rational for why the use of this library is necessary.
 
 Additionally, interested users are encouraged to fork *Zeke* for use as the front-end for other, subject-specific modeling projects (ex. theoretical ecology using predator-prey models rather than epidemic models).
 
