@@ -13,6 +13,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django_mathjax',
 )
 ROOT_URLCONF = 'zeke.urls'
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -23,3 +24,4 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "..", "templates"),
 )
+MATHJAX_ENABLED=True

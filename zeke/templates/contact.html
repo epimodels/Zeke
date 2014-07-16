@@ -1,4 +1,5 @@
 {% extends "root.html" %}
+{% load mathjax %}
 
 {% block nav %}
             <li><a href="/about">About</a></li>
@@ -7,14 +8,14 @@
 
 
 {% block content %}
-
+{% mathjax_scripts %}
     <div class="row">
         <div class="col-lg-9">
             <h1>Contact</h1>
             <p>
 			<i>Zeke</i> project administrators can be reached for questions, comments, 		support, etc. at:
 			<ol>
-	<li>Email: zekemodels {at} gmail {dot} com</li>
+	<li>Email: zekemodels@gmail.comcom</li>
 	<li>Twitter: @GermsAndNumbers</li>
 </ol>
             </p>

@@ -7,6 +7,7 @@ setup(
     install_requires=[
         'Django',
         'matplotlib',
+        'Django-Mathjax',
     ],
     long_description=open('README.rst').read(),
     name='zeke',
