@@ -1,6 +1,8 @@
+{% load mathjax %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  	{% mathjax_scripts %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -103,19 +105,19 @@
                 Susceptible-Zombie-Dead mathematical model. Takes two arguments:
             </p>
             <ul>
-                <li>Beta: Contact rate</li>
-                <li>Gamma: Infection duration in days</li>
+                <li>\(\beta\): Contact rate</li>
+                <li>\(\gamma\): Infection duration in days</li>
             </ul>
             <hr />
             <div class="container" style="width: 267px">
                 <form action="/">
                     <input type="hidden" name="model" value="sir">
                     <div class="row">
-                        <span class="col-lg-3">Beta</span><span class="col-lg-1"><input id="beta" name="beta" value="{{beta}}"></span>
+                        <span class="col-lg-3">\(\beta\)</span><span class="col-lg-1"><input id="beta" name="beta" value="{{beta}}"></span>
                     </div>
 
                     <div class="row">
-                        <span class="col-lg-3">Gamma</span><span class="col-lg-1"><input id="gamma" name="gamma" value="{{gamma}}"></span>
+                        <span class="col-lg-3">\(\gamma\)</span><span class="col-lg-1"><input id="gamma" name="gamma" value="{{gamma}}"></span>
                     </div>
 
                     <div class="row">
@@ -143,22 +145,22 @@
                 Zombie epidemic model with latent infection period. Takes three arguments:
             </p>
             <ul>
-                <li>Beta: Contact rate</li>
-                <li>Gamma: Infection duration in days</li>
-                <li>Alpha: A latent (non-zombie infected) period in days</li>
+                <li>\(\beta\): Contact rate</li>
+                <li>\(\gamma\): Infection duration in days</li>
+                <li>\(\alpha\): A latent (non-zombie infected) period in days</li>
             </ul>
             <hr />
             <div class="container" style="width: 267px">
                 <form action="/">
                     <input type="hidden" name="model" value="seir">
                     <div class="row">
-                        <span class="col-lg-3">Beta</span><span class="col-lg-1"><input id="beta" name="beta" value="{{beta}}"></span>
+                        <span class="col-lg-3">\(\beta\)</span><span class="col-lg-1"><input id="beta" name="beta" value="{{beta}}"></span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-3">Gamma</span><span class="col-lg-1"><input id="gamma" name="gamma" value="{{gamma}}"></span>
+                        <span class="col-lg-3">\(\gamma\)</span><span class="col-lg-1"><input id="gamma" name="gamma" value="{{gamma}}"></span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-3">Alpha</span><span class="col-lg-1"><input id="alpha" name="alpha" value="{{alpha}}"></span>
+                        <span class="col-lg-3">\(\alpha\)</span><span class="col-lg-1"><input id="alpha" name="alpha" value="{{alpha}}"></span>
                     </div>
                     <div class="row">
                         <span class="col-lg-12" style="text-align: center; margin-top: 1em">
@@ -183,38 +185,38 @@
                 "Safe Haven" Model - Survivors make for shelter, can fight back. Takes six arguments:
             </p>
             <ul>
-               <li> Psi: Rate at which survivors find shelter </li>
-               <li> Beta_F: Contact rate for unsheltered survivors </li>
-               <li> Beta_H: Contact rate for sheltered survivors </li>
-               <li> Gamma: Infection duration in days </li>
-               <li> Alpha: A latent (non-zombie infected) period in days </li>
-               <li> Kappa: Probability a sheltered survivor x zombie encounter ends with a dead zombie </li>
+               <li> \(\psi\): Rate at which survivors find shelter </li>
+               <li> \(\beta_F\): Contact rate for unsheltered survivors </li>
+               <li> \(\beta_H\): Contact rate for sheltered survivors </li>
+               <li> \(\gamma\): Infection duration in days </li>
+               <li> \(\alpha\): A latent (non-zombie infected) period in days </li>
+               <li> \(\kappa\): Probability a sheltered survivor x zombie encounter ends with a dead zombie </li>
             </ul>
             <hr />
             <div class="container" style="width: 267px">
                 <form action="/">
                     <input type="hidden" name="model" value="haven">
                     <div class="row">
-                        <span class="col-lg-3">Psi</span><span class="col-lg-1"> <input id="psi" name="psi" value="{{psi}}"> </span>
+                        <span class="col-lg-3">\(\psi\)</span><span class="col-lg-1"> <input id="psi" name="psi" value="{{psi}}"> </span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-3">Beta_F </span><span class="col-lg-1"><input id="beta_f" name="beta_f" value="{{beta_f}}"></span>
+                        <span class="col-lg-3">\(\beta_F\)</span><span class="col-lg-1"><input id="beta_f" name="beta_f" value="{{beta_f}}"></span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-3">Beta_H </span><span class="col-lg-1"><input id="beta_h" name="beta_h" value="{{beta_h}}"></span>
+                        <span class="col-lg-3">\(\beta_H\)</span><span class="col-lg-1"><input id="beta_h" name="beta_h" value="{{beta_h}}"></span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-3">Gamma </span><span class="col-lg-1"><input id="gamma" name="gamma" value="{{gamma}}"></span>
+                        <span class="col-lg-3">\(\gamma\)</span><span class="col-lg-1"><input id="gamma" name="gamma" value="{{gamma}}"></span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-3">Alpha </span><span class="col-lg-1"><input id="alpha" name="alpha" value="{{alpha}}"></span>
+                        <span class="col-lg-3">\(\alpha\)</span><span class="col-lg-1"><input id="alpha" name="alpha" value="{{alpha}}"></span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-3">Kappa </span><span class="col-lg-1"><input id="kappa" name="kappa" value="{{kappa}}"></span>
+                        <span class="col-lg-3">\(\kappa\)</span><span class="col-lg-1"><input id="kappa" name="kappa" value="{{kappa}}"></span>
                     </div>
                     <div class="row">
                         <span class="col-lg-12" style="text-align: center; margin-top: 1em">
-                            <input name="set"   class="btn btn-primary" type="submit" value="Set values">
+                            <input\(\ name="set"   class="btn btn-primary" type="submit" value="Set values">
                         </span>
                         <span class="col-lg-12" style="text-align: center; margin-top: 1em">
                             <input name="reset" class="btn" type="submit" value="Reset">
