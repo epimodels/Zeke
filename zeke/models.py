@@ -20,7 +20,8 @@ def ZombieSIR(infect_prob, infect_duration):
     ### Beta: A probability of infection
     ### Gamma: Infection duration in days
     """
-    #Parameter Values and Initial Conditions
+
+    # Parameter Values and Initial Conditions
     S0 = 0.9999
     I0 = 0.0001
     R0 = 0.
@@ -35,10 +36,10 @@ def ZombieSIR(infect_prob, infect_duration):
     # Calculate R_0
     R_0 = beta/gamma
 
-    #Solving the differential equation. Solves over t for initial conditions
+    # Solving the differential equation. Solves over t for initial conditions
     # PopIn
     def SIR_System(t, InitialPop):
-    #Creating an array of equations
+        # Creating an array of equations
         SIR_Equations = numpy.zeros((3))
         SIR_Equations[0] = -beta * (InitialPop[0] * InitialPop[1])
         SIR_Equations[1] = (
@@ -79,7 +80,7 @@ def ZombieSEIR(infect_prob, infect_duration, latent_period):
     ### Gamma: Infection duration in days
     ### Alpha: A latent (non-zombie infected) period in days
     """
-    #Parameter Values and Initial Conditions
+    # Parameter Values and Initial Conditions
     S0 = 0.9999
     E0 = 0.
     I0 = 0.0001
@@ -93,10 +94,10 @@ def ZombieSEIR(infect_prob, infect_duration, latent_period):
     t_step = 0.1
     numpy.arange(t_start, t_end, t_step)
 
-    #Solving the differential equation. Solves over t for initial conditions
+    # Solving the differential equation. Solves over t for initial conditions
     # PopIn
     def SEIR_System(t, InitialPop):
-    #Creating an array of equations
+        # Creating an array of equations
         SEIR_Equations = numpy.zeros((4))
         SEIR_Equations[0] = -beta * (InitialPop[0] * InitialPop[2])
         SEIR_Equations[1] = (
@@ -144,7 +145,7 @@ def Haven(infect_prob_free, infect_prob_safe, infect_duration,
     ### Kappa: Probability a sheltered survivor x zombie encounter ends with a
     ###  dead zombie
     """
-    #Parameter Values and Initial Conditions
+    # Parameter Values and Initial Conditions
     S0 = 0.9999
     E0 = 0.
     I0 = 0.0001
@@ -163,10 +164,10 @@ def Haven(infect_prob_free, infect_prob_safe, infect_duration,
     t_step = 0.1
     numpy.arange(t_start, t_end, t_step)
 
-    #Solving the differential equation. Solves over t for initial conditions
+    # Solving the differential equation. Solves over t for initial conditions
     # PopIn
     def Haven_System(t, InitialPop):
-    #Creating an array of equations
+        # Creating an array of equations
         Haven_Equations = numpy.zeros((6))
         Haven_Equations[0] = -beta_f * (
             InitialPop[0] * InitialPop[3]) - psi * InitialPop[0]
