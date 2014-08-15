@@ -34,7 +34,7 @@ def ZombieSIR(infect_prob, infect_duration):
     numpy.arange(t_start, t_end, t_step)
 
     # Calculate R_0
-    R_0 = beta/gamma
+    #R_0 = beta/gamma
 
     # Solving the differential equation. Solves over t for initial conditions
     # PopIn
@@ -69,7 +69,7 @@ def ZombieSIR(infect_prob, infect_duration):
     t = numpy.vstack(time_series)
     s, i, r = numpy.column_stack(outcome_series)
 
-    return t, s, i, r, R_0
+    return t, s, i, r
 
 
 def ZombieSEIR(infect_prob, infect_duration, latent_period):
